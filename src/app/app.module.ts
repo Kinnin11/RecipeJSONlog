@@ -9,6 +9,7 @@ import { SimpleStyleDirective } from 'src/simple-style/simple-style.directive';
 import { Routes, RouterModule } from '@angular/router';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail/recipe-detail.component';
 import { EnterRecipeComponent } from './enter-recipe/enter-recipe.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
@@ -29,7 +30,8 @@ const routes: Routes = [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(routes),
-    ClipboardModule
+    ClipboardModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

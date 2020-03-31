@@ -16,6 +16,10 @@ export class RecipeService {
     return recipes[recipeId];
   }
 
+  copyRecipesToClipboard() {
+    this._clipboardService.copyFromContent(JSON.stringify(recipes));
+  }
+
   getRecipeList() {
     let listOutput = [];
     for (let i = 0; i < recipes.length; i++) {
@@ -25,17 +29,16 @@ export class RecipeService {
     return listOutput;
   }
 
-  addRecipe(){
+  addRecipe(nam: string, ingrList : string[], ingrTag : string[], tag : string[], direct: string){
     let jsonOutput : RecipeJSON = {
       id : recipes.length,
-      name : "test",
-      ingredientlist : ["test1", "test2"],
-      ingredienttags : ["test1", "test2"],
-      tags : ["test1", "test2"],
-      directions : "clipboard test"
+      name : nam,
+      ingredientlist : ingrList,
+      ingredienttags : ingrTag,
+      tags : tag,
+      directions : direct
     }
     recipes.push(jsonOutput);
-    this._clipboardService.copyFromContent(JSON.stringify(recipes));
     return JSON.stringify(recipes);
   }
 

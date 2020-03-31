@@ -11,9 +11,8 @@ export class RecipeListComponent implements OnInit {
 
   constructor(
     private recipeService: RecipeService
-  ) {
-    this.recipeService.addRecipe();
-   }
+  ) {}
+   
 
    get myArray() {
      return this.recipeService.getRecipeList();

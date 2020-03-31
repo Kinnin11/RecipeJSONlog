@@ -1,1 +1,27 @@
-{{recipes | json}}
+<h3>Enter recipe</h3>
+<form [formGroup]="recipeForm" (ngSubmit)="onSubmit(recipeForm.value)">
+
+    <div>
+      <label for="name">
+        Name
+      </label>
+      <input id="name" type="text" formControlName="name">
+    </div>
+
+    <div>
+        <label for="ingredients">
+            Ingredients
+        </label>
+    </div>
+
+  
+    <div>
+      <label for="directions">
+        Directions
+      </label>
+      <textarea id="directions" formControlName="directions" rows="15" cols="100"></textarea>
+    </div>
+  
+    <button class="button" type="submit">Purchase</button>
+  
+  </form>
