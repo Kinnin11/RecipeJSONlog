@@ -2,9 +2,21 @@
 
 <div *ngIf="recipe">
   <h3>{{ recipe.name }}</h3>
+  Servings: {{ recipe.servings }}
+  <div *ngIf="recipe.cooktime!=null && recipe.preptime!=null">
+    Prep time: {{ recipe.preptime }} minutes<BR>
+    Cook time: {{ recipe.cooktime }} minutes<BR>
+    Total time: {{recipe.cooktime + recipe.preptime }} minutes
+  </div>
+  <div *ngIf="recipe.source!=''">Source: {{recipe.source}}</div>
+  <div *ngIf="recipe.image!=''">{{recipe.image}}</div>
+  <ul>
   <li *ngFor="let ingredient of recipe.ingredientlist">{{ ingredient }}</li>
+  </ul>
 </div>
 <div>
-  {{ recipe.directions }}
+  <ol>
+    <li *ngFor="let line of recipe.directions.split('\n')">{{line}}</li>
+  </ol>
 </div>
 

@@ -29,13 +29,18 @@ export class RecipeService {
     return listOutput;
   }
 
-  addRecipe(nam: string, ingrList : string[], ingrTag : string[], tag : string[], direct: string){
+  addRecipe(nam: string, tag : string[], serv: string, src:string, img: string, cook: number, prep:number, ingrList : string[], ingrTag : string[], direct: string){
     let jsonOutput : RecipeJSON = {
       id : recipes.length,
       name : nam,
-      ingredientlist : ingrList,
-      ingredienttags : ingrTag,
       tags : tag,
+      servings : serv,
+      source: src,
+      image: img,
+      cooktime: cook,
+      preptime: prep,
+      ingredienttags : ingrTag,
+      ingredientlist : ingrList,     
       directions : direct
     }
     recipes.push(jsonOutput);

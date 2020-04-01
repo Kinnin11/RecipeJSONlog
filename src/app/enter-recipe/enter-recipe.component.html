@@ -7,11 +7,47 @@
       </label>
       <input id="name" type="text" formControlName="name">
     </div>
+    <div>
+      <label for="servings">servings 
+        <input type="text" name="servings" id="servings" formControlName="servings">
+      </label>
+    </div>
+    <div>
+      <label for="preptime">Prep time
+        <input type="number" formControlName="preptime" placeholder="In minutes">
+      </label>
+    </div>
+    <div>
+      <label for="cooktime">Cook time
+        <input type="number" name="cooktime" id="cooktime" formControlName="cooktime" placeholder="In minutes">
+      </label>
+    </div>
+    <div>
+      <label for="source">Source
+        <input type="text" formControlName="source">
+    </label>
+  </div>
+  <div>
+    <label for="image">Image link
+      <input type="text" formControlName="image">
+    </label>
+  </div>
+
+    <div formArrayName="tagList">
+        <label for="tagList">
+            Tags
+        </label>
+      <div *ngFor="let item of tagLines.controls; let tagIndex = index" [formGroupName]="tagIndex">
+        <input formControlName="tag">
+        <button type="button" (click)="deleteTagLine(tagIndex)">Delete tag</button>
+      </div>
+      <button type="button" (click)="addTagLine()">Add tag</button>
+    </div>
 
     <div>
-        <label for="ingredients">
-            Ingredients
-        </label>
+      <label for="Ingredients">Ingredients
+      <textarea id="ingredients" formControlName="ingredients" rows="15" cols="50" placeholder="Remember to put ';' on both sides of ingredients to create proper tags"></textarea>
+    </label>
     </div>
 
   
@@ -22,6 +58,8 @@
       <textarea id="directions" formControlName="directions" rows="15" cols="100"></textarea>
     </div>
   
-    <button class="button" type="submit">Purchase</button>
+    <button class="button" type="submit">Submit</button>
+    <button type="button" (click)="recipeService.copyRecipesToClipboard()">Copy recipes to Clipboard</button>
   
   </form>
+{{this.recipeForm.value | json}}
