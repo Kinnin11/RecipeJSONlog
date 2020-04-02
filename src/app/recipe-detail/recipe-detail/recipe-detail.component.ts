@@ -20,11 +20,12 @@ export class RecipeDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params=>{
       let recipe = this.recipeService.getRecipe(+params.get('recipeId'));
+      console.log(+params.get("recipeId"));
       this.recipe = recipe;
        for (let i = 0; i < this.recipe.ingredientlist.length; i++) {
          this.ingredientList.push(recipe.ingredientlist[i].replace(/;/g,''));         
        }
-    })
+    });
   }
 
 }

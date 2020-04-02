@@ -7,38 +7,88 @@ import { ClipboardService} from 'ngx-clipboard';
   providedIn: 'root'
 })
 export class RecipeService {
-
-  recipes
+  private recipes : RecipeJSON[];
+  private taglist = [];
   constructor(
     private _clipboardService: ClipboardService
   ) {  
     //copy the recipelist from the json to allow special operations
     this.recipes = recipes;
+    console.log(this.recipes);
    }
 
-  getRecipe(recipeId) {
-    return this.recipes[recipeId];
+  getRecipe(recipeId : number) : RecipeJSON {
+    let recipeOutput = null;
+    this.recipes.forEach(recipe => {
+      if(recipe.id === recipeId){
+        recipeOutput = recipe;  
+      }
+    });
+    return recipeOutput;
   }
 
   copyRecipesToClipboard() {
     this._clipboardService.copyFromContent(JSON.stringify(this.recipes));
   }
 
-  getRecipeList() {
+  getRecipeList() : string[] {
     let listOutput = [];
-    for (let i = 0; i < this.recipes.length; i++) {
-      listOutput.push({name: this.recipes[i].name, id:  this.recipes[i].id});      
-    }
+    this.recipes.forEach(recipe => {
+      listOutput.push({name: recipe.name, id: recipe.id});
+      
+    });
     return listOutput;
+  }
+
+  getRecipeListbyTag(tagLookup : string) : string[] {
+    let outpuArray = [];
+    tagLookup = tagLookup.toLowerCase();
+    this.recipes.forEach(recipe => {
+      recipe.tags.forEach(tag => {
+        if(tag.toLowerCase() == tagLookup) {
+          outpuArray.push({name: recipe.name, id: recipe.id});  
+          console.log(recipe.name); 
+          console.log(tag.toLowerCase() == tagLookup)  ;     
+        }
+      });
+      /*recipe.ingredienttags.forEach(tag => {
+        if(tag.toLowerCase() == tagLookup){
+          outpuArray.push({name: recipe.name, id: recipe.id});  
+        }        
+      });*/
+    });
+    
+    return outpuArray;
+  }
+
+  getTagList() : string[] {
+    this.updateTagList();
+    return this.taglist;    
+  }
+
+  private updateTagList() {
+    recipes.forEach(recipe => {
+      recipe.tags.forEach(tag => {
+        let exists = false;
+        this.taglist.forEach(t => {
+          if (t.toLowerCase() == tag.toLowerCase()){
+            exists = true;
+          }
+        });
+        if(!exists){
+          this.taglist.push(tag);
+        }
+      });
+    });
   }
 
   addRecipe(recipeData, tag : string[], ingrList : string[], ingrTag : string[], id:number = null){
     //if new, add to the list
-    if (id == null)
+    console.log(this.recipes.length);
+    if (id == null) {
       id = this.recipes.length;
-    //else specifically delete every recipe with the id
-    else
-      this.recipes = this.recipes.splice(id,id);
+    }
+    console.log(this.recipes);
     //create an object that contains all the data
     let jsonOutput : RecipeJSON = {
       id : id,
@@ -54,10 +104,10 @@ export class RecipeService {
       directions : recipeData.directions.trim()
     }
     //push it onto the copy of the list
-    this.recipes.push(jsonOutput);
+    this.recipes[id] = jsonOutput;
+    
+    this.updateTagList();
     return JSON.stringify(this.recipes);
-  }
-
-  
+  }  
 }
 

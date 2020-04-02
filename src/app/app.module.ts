@@ -9,6 +9,8 @@ import { SimpleStyleDirective } from 'src/simple-style/simple-style.directive';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail/recipe-detail.component';
 import { EnterRecipeComponent } from './enter-recipe/enter-recipe.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TagListComponent } from './tag-list/tag-list.component';
+import { TagRecipeListComponent } from './tag-recipe-list/tag-recipe-list.component';
 
 
 
@@ -18,7 +20,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     RecipeListComponent,
     SimpleStyleDirective,
     RecipeDetailComponent,
-    EnterRecipeComponent
+    EnterRecipeComponent,
+    TagListComponent,
+    TagRecipeListComponent
   ],
   imports: [
     BrowserModule,

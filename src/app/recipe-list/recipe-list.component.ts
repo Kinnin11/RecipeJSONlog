@@ -15,8 +15,7 @@ export class RecipeListComponent implements OnInit {
    
 
    get myArray() {
-     return this.recipeService.getRecipeList();
-     
+     return this.recipeService.getRecipeList();     
    }
 
   ngOnInit(): void {

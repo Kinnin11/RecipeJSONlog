@@ -8,6 +8,7 @@
     Cook time: {{ recipe.cooktime }} minutes<BR>
     Total time: {{recipe.cooktime + recipe.preptime }} minutes
   </div>
+  <div *ngFor="let tag of recipe.tags">{{tag}}</div>
   <div *ngIf="recipe.source!=''">Source: {{recipe.source}}</div>
   <div *ngIf="recipe.image!=''">{{recipe.image}}</div>
   <ul>

@@ -1,0 +1,3 @@
+<li *ngFor="let obj of recipeList"><a [title]="obj.name" [routerLink]="['/recipe-detail', obj.id]">{{obj.name}}</a></li>
+
+<router-outlet></router-outlet>
