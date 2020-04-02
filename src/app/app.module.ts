@@ -6,17 +6,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { SimpleStyleDirective } from 'src/simple-style/simple-style.directive';
-import { Routes, RouterModule } from '@angular/router';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail/recipe-detail.component';
 import { EnterRecipeComponent } from './enter-recipe/enter-recipe.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
-const routes: Routes = [
-  {path: 'recipe-list', component: RecipeListComponent},
-  {path: 'recipe-detail/:recipeId', component: RecipeDetailComponent},
-  {path: 'enter-recipe', component : EnterRecipeComponent}
-];
 
 @NgModule({
   declarations: [
@@ -29,7 +23,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(routes),
+    //RouterModule.forRoot(routes),
     ClipboardModule,
     ReactiveFormsModule,
   ],

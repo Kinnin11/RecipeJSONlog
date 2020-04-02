@@ -1,5 +1,5 @@
 <h2>Recipe Details</h2>
-
+<a [routerLink]="['/enter-recipe', recipe.id]" routerLinkActive="active">Edit Recipe</a><BR>
 <div *ngIf="recipe">
   <h3>{{ recipe.name }}</h3>
   Servings: {{ recipe.servings }}
@@ -11,7 +11,7 @@
   <div *ngIf="recipe.source!=''">Source: {{recipe.source}}</div>
   <div *ngIf="recipe.image!=''">{{recipe.image}}</div>
   <ul>
-  <li *ngFor="let ingredient of recipe.ingredientlist">{{ ingredient }}</li>
+  <li *ngFor="let ingredient of ingredientList">{{ ingredient }}</li>
   </ul>
 </div>
 <div>

@@ -7,45 +7,57 @@ import { ClipboardService} from 'ngx-clipboard';
   providedIn: 'root'
 })
 export class RecipeService {
+
+  recipes
   constructor(
     private _clipboardService: ClipboardService
   ) {  
+    //copy the recipelist from the json to allow special operations
+    this.recipes = recipes;
    }
 
   getRecipe(recipeId) {
-    return recipes[recipeId];
+    return this.recipes[recipeId];
   }
 
   copyRecipesToClipboard() {
-    this._clipboardService.copyFromContent(JSON.stringify(recipes));
+    this._clipboardService.copyFromContent(JSON.stringify(this.recipes));
   }
 
   getRecipeList() {
     let listOutput = [];
-    for (let i = 0; i < recipes.length; i++) {
-      listOutput.push({name: recipes[i].name, id:  recipes[i].id});      
+    for (let i = 0; i < this.recipes.length; i++) {
+      listOutput.push({name: this.recipes[i].name, id:  this.recipes[i].id});      
     }
-    console.log(listOutput);
     return listOutput;
   }
 
-  addRecipe(nam: string, tag : string[], serv: string, src:string, img: string, cook: number, prep:number, ingrList : string[], ingrTag : string[], direct: string){
+  addRecipe(recipeData, tag : string[], ingrList : string[], ingrTag : string[], id:number = null){
+    //if new, add to the list
+    if (id == null)
+      id = this.recipes.length;
+    //else specifically delete every recipe with the id
+    else
+      this.recipes = this.recipes.splice(id,id);
+    //create an object that contains all the data
     let jsonOutput : RecipeJSON = {
-      id : recipes.length,
-      name : nam,
+      id : id,
+      name : recipeData.name,
       tags : tag,
-      servings : serv,
-      source: src,
-      image: img,
-      cooktime: cook,
-      preptime: prep,
+      servings : recipeData.servings,
+      source: recipeData.source,
+      image: recipeData.image,
+      cooktime: recipeData.cooktime,
+      preptime: recipeData.preptime,
       ingredienttags : ingrTag,
       ingredientlist : ingrList,     
-      directions : direct
+      directions : recipeData.directions.trim()
     }
-    recipes.push(jsonOutput);
-    return JSON.stringify(recipes);
+    //push it onto the copy of the list
+    this.recipes.push(jsonOutput);
+    return JSON.stringify(this.recipes);
   }
 
   
 }
+

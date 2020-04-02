@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {RecipeService } from '../../recipe-service.service'
+import { RecipeJSON } from 'src/app/recipeJSON';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -8,7 +9,8 @@ import {RecipeService } from '../../recipe-service.service'
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent implements OnInit {
-  recipe;
+  recipe: RecipeJSON;
+  ingredientList = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -17,7 +19,11 @@ export class RecipeDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params=>{
-      this.recipe = this.recipeService.getRecipe(+params.get('recipeId'));
+      let recipe = this.recipeService.getRecipe(+params.get('recipeId'));
+      this.recipe = recipe;
+       for (let i = 0; i < this.recipe.ingredientlist.length; i++) {
+         this.ingredientList.push(recipe.ingredientlist[i].replace(/;/g,''));         
+       }
     })
   }
 

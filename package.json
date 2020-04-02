@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~9.1.0",
     "@angular/platform-browser-dynamic": "~9.1.0",
     "@angular/router": "~9.1.0",
+    "@types/jquery": "^3.3.34",
     "fs": "0.0.1-security",
     "ngx-clipboard": "^13.0.0",
     "rxjs": "~6.5.4",
