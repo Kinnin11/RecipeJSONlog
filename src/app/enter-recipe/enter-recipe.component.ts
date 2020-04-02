@@ -102,7 +102,7 @@ export class EnterRecipeComponent implements OnInit {
 
     //taking the tags out of [tag:""] form and into ["",""]
     recipeData.tagList.forEach(function (value) {
-      if(value["tag"] != '')
+      if(value["tag"] != '' && value["tag"] != null)
         tagList.push(value['tag']);
     });
 
@@ -115,7 +115,7 @@ export class EnterRecipeComponent implements OnInit {
 
     this.recipeService.addRecipe(recipeData, tagList, ingrList, ingrTag, id);
     this.recipeForm.reset();
-
+    this.recipeId = -1;
   }
 
 }

@@ -83,10 +83,12 @@ export class RecipeService {
   }
 
   addRecipe(recipeData, tag : string[], ingrList : string[], ingrTag : string[], id:number = null){
+    let newRecipe = true;
     //if new, add to the list
     console.log(this.recipes.length);
     if (id == null) {
       id = this.recipes.length;
+      newRecipe = false;
     }
     console.log(this.recipes);
     //create an object that contains all the data
@@ -104,6 +106,9 @@ export class RecipeService {
       directions : recipeData.directions.trim()
     }
     //push it onto the copy of the list
+    if(newRecipe) {
+      this.recipes.push()
+    }
     this.recipes[id] = jsonOutput;
     
     this.updateTagList();
