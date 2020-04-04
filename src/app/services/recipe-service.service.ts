@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import recipes from '../../../recipes.json';
-import { RecipeJSON } from './recipeJSON';
+import recipes from '../../assets/recipes.json';
+import { RecipeJSON } from '../models/recipeJSON';
 import { ClipboardService} from 'ngx-clipboard';
 
 @Injectable({
