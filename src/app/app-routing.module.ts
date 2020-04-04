@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'enter-recipe', component : EnterRecipeComponent},
   {path: 'enter-recipe/:recipeId', component: EnterRecipeComponent},
   {path: 'tag-list', component: TagListComponent},
-  {path: 'tag-recipe-list/:tagName', component:TagRecipeListComponent},
+  {path: 'tag-recipe-list/:tag', component:TagRecipeListComponent},
 ];
 
 @NgModule({

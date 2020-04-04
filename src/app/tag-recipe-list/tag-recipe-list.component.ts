@@ -17,10 +17,8 @@ export class TagRecipeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params=>{
-      this.tag = params.get("tagName");
-      console.log(+params.keys);
+      this.tag = params.get("tag");
     });
-    console.log(this.tag);
   }
 
   get recipeList() {

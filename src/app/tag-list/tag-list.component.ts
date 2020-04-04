@@ -7,14 +7,18 @@ import { RecipeService } from '../recipe-service.service';
   styleUrls: ['./tag-list.component.css']
 })
 export class TagListComponent implements OnInit {
-  
+
 
   constructor(
     private recipeService: RecipeService
   ) { }
 
   get taglist() {
-    return this.recipeService.getTagList();
+    let outputArray = [];
+    for (const i in this.recipeService.getTagList()) {
+      outputArray.push(i);
+    }
+    return outputArray;
   }
 
   ngOnInit(): void {

@@ -8,13 +8,14 @@ import { ClipboardService} from 'ngx-clipboard';
 })
 export class RecipeService {
   private recipes : RecipeJSON[];
-  private taglist = [];
+  private taglist = {};
   constructor(
     private _clipboardService: ClipboardService
   ) {  
     //copy the recipelist from the json to allow special operations
     this.recipes = recipes;
-    console.log(this.recipes);
+    console.log(this.taglist);
+    this.fillTagList();
    }
 
   getRecipe(recipeId : number) : RecipeJSON {
@@ -42,44 +43,31 @@ export class RecipeService {
 
   getRecipeListbyTag(tagLookup : string) : string[] {
     let outpuArray = [];
-    tagLookup = tagLookup.toLowerCase();
-    this.recipes.forEach(recipe => {
-      recipe.tags.forEach(tag => {
-        if(tag.toLowerCase() == tagLookup) {
-          outpuArray.push({name: recipe.name, id: recipe.id});  
-          console.log(recipe.name); 
-          console.log(tag.toLowerCase() == tagLookup)  ;     
-        }
-      });
-      /*recipe.ingredienttags.forEach(tag => {
-        if(tag.toLowerCase() == tagLookup){
-          outpuArray.push({name: recipe.name, id: recipe.id});  
-        }        
-      });*/
-    });
-    
+    this.taglist[tagLookup].forEach(recipeId => {
+          outpuArray.push({name: this.getRecipe(recipeId).name, id: recipeId})
+    }); 
     return outpuArray;
   }
 
-  getTagList() : string[] {
-    this.updateTagList();
+  getTagList() {
     return this.taglist;    
   }
+  
 
-  private updateTagList() {
+  private fillTagList() {
+    //go through each recipes tags
     recipes.forEach(recipe => {
       recipe.tags.forEach(tag => {
-        let exists = false;
-        this.taglist.forEach(t => {
-          if (t.toLowerCase() == tag.toLowerCase()){
-            exists = true;
-          }
-        });
-        if(!exists){
-          this.taglist.push(tag);
+        //if tag exists push it onto the tag's recipe list, else create a new tag with list
+        if(this.taglist[capitalizeFirstLetter(tag)] != undefined) {
+          this.taglist[capitalizeFirstLetter(tag)].push(recipe.id);
+        } else {
+          this.taglist[capitalizeFirstLetter(tag)] = [recipe.id];
         }
       });
     });
+
+
   }
 
   addRecipe(recipeData, tag : string[], ingrList : string[], ingrTag : string[], id:number = null){
@@ -111,8 +99,11 @@ export class RecipeService {
     }
     this.recipes[id] = jsonOutput;
     
-    this.updateTagList();
+    //this.updateTagList();
     return JSON.stringify(this.recipes);
   }  
 }
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
