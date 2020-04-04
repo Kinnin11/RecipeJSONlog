@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RecipeService } from '../recipe-service.service';
+import { RecipeService } from '../../../recipe-service.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -15,6 +15,9 @@ export class TagRecipeListComponent implements OnInit {
     private recipeService: RecipeService
   ) { }
 
+  get Tag() {
+    return this.tag;
+  }
   ngOnInit(): void {
     this.route.paramMap.subscribe(params=>{
       this.tag = params.get("tag");

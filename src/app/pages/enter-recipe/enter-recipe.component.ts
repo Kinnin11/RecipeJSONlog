@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { RecipeService } from '../recipe-service.service';
+import { RecipeService } from '../../recipe-service.service';
 import { FormBuilder, FormArray } from '@angular/forms';
-import { RecipeJSON } from '../recipeJSON';
+import { RecipeJSON } from '../../recipeJSON';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

@@ -17,6 +17,14 @@ export class RecipeDetailComponent implements OnInit {
     private recipeService: RecipeService
   ) { }
 
+  get tags() {
+    let returnString = "";
+    this.recipe.tags.forEach(tag => {
+      returnString += tag + ";";
+    });
+    return this.tags;
+  }
+
   ngOnInit(): void {
     this.route.paramMap.subscribe(params=>{
       let recipe = this.recipeService.getRecipe(+params.get('recipeId'));

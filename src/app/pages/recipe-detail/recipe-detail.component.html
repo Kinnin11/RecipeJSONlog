@@ -1,0 +1,36 @@
+<h2>{{recipe.name}}</h2>
+<div *ngIf="recipe" class="container">
+  <a [routerLink]="['/enter-recipe', recipe.id]" routerLinkActive="active">Edit Recipe</a><BR>
+  <div class="row">
+    <div class="col">Servings: {{ recipe.servings }}
+      <div *ngIf="recipe.cooktime!=null && recipe.preptime!=null">
+        Prep time: {{ recipe.preptime }} minutes<BR>
+        Cook time: {{ recipe.cooktime }} minutes<BR>
+        Total time: {{recipe.cooktime + recipe.preptime }} minutes
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="tags " *ngFor="let tag of recipe.tags">
+        <a [title]="tag" [routerLink]="['/tag-recipe-list', tag]">
+          <button class="btn btn-default btn-sm ml-1">
+            {{tag}}
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div *ngIf="recipe.source!=''">Source: {{recipe.source}}</div>
+  <div *ngIf="recipe.image!=''">{{recipe.image}}</div>
+  <ul>
+    <li *ngFor="let ingredient of ingredientList">{{ ingredient }}</li>
+  </ul>
+  <div>
+    <ol>
+      <li *ngFor="let line of recipe.directions.split('\n')">{{line}}</li>
+    </ol>
+  </div>
+
+</div>

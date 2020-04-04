@@ -1,0 +1,12 @@
+<h2>{{tag}} recipes</h2>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <ul>
+                <li *ngFor="let obj of recipeList"><a [title]="obj.name"
+                        [routerLink]="['/recipe-detail', obj.id]">{{obj.name}}</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row"></div>
+</div>

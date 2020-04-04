@@ -1,16 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ClipboardModule } from 'ngx-clipboard';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';;
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RecipeListComponent } from './recipe-list/recipe-list.component';
+import { RecipeListComponent } from './pages/recipe-list/recipe-list.component';
 import { SimpleStyleDirective } from 'src/simple-style/simple-style.directive';
-import { RecipeDetailComponent } from './recipe-detail/recipe-detail/recipe-detail.component';
-import { EnterRecipeComponent } from './enter-recipe/enter-recipe.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { TagListComponent } from './tag-list/tag-list.component';
-import { TagRecipeListComponent } from './tag-recipe-list/tag-recipe-list.component';
+import { RecipeDetailComponent } from './pages/recipe-detail/recipe-detail.component';
+import { EnterRecipeComponent } from './pages/enter-recipe/enter-recipe.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { TagListComponent } from './pages/tag-list/tag-list.component';
+import { TagRecipeListComponent } from './pages/tag-list/tag-recipe-list/tag-recipe-list.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NavbarComponent } from './template/navbar/navbar.component';
+import { HomeComponent } from './pages/home/home.component';
+import { ReversePipe } from './pipes/reverse/reverse.pipe';
 
 
 //test
@@ -22,14 +27,19 @@ import { TagRecipeListComponent } from './tag-recipe-list/tag-recipe-list.compon
     RecipeDetailComponent,
     EnterRecipeComponent,
     TagListComponent,
-    TagRecipeListComponent
+    TagRecipeListComponent,
+    NavbarComponent,
+    HomeComponent,
+    ReversePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    //RouterModule.forRoot(routes),
+    MDBBootstrapModule.forRoot(),
     ClipboardModule,
     ReactiveFormsModule,
+    FormsModule,
+    NoopAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

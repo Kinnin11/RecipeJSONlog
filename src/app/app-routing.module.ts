@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RecipeListComponent } from './recipe-list/recipe-list.component';
-import { RecipeDetailComponent } from './recipe-detail/recipe-detail/recipe-detail.component';
-import { EnterRecipeComponent } from './enter-recipe/enter-recipe.component';
-import { TagListComponent } from './tag-list/tag-list.component';
-import { TagRecipeListComponent } from './tag-recipe-list/tag-recipe-list.component';
+import { RecipeListComponent } from './pages/recipe-list/recipe-list.component';
+import { RecipeDetailComponent } from './pages/recipe-detail/recipe-detail.component';
+import { EnterRecipeComponent } from './pages/enter-recipe/enter-recipe.component';
+import { TagListComponent } from './pages/tag-list/tag-list.component';
+import { TagRecipeListComponent } from './pages/tag-list/tag-recipe-list/tag-recipe-list.component';
+import { HomeComponent } from './pages/home/home.component';
 
 
 const routes: Routes = [
+  {path: '', component: HomeComponent},
   {path: 'recipe-list', component: RecipeListComponent},
   {path: 'recipe-detail/:recipeId', component: RecipeDetailComponent},
   {path: 'enter-recipe', component : EnterRecipeComponent},
