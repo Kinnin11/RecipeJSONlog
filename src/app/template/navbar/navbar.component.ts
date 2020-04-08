@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormArray } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +12,7 @@ export class NavbarComponent implements OnInit {
   myForm;
   constructor(
     private formBuilder : FormBuilder,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -19,8 +21,17 @@ export class NavbarComponent implements OnInit {
     })
   }
 
-  update() {
+  get searchTerms() {
+    return this.myForm.get('search') as string;
+  }
 
+
+  onEnter() {
+    this.search(this.searchTerms);
+  }
+
+  search(searchTerms) {
+    this.router.navigate(['/search-results/' + searchTerms.value]);
   }
 
 }

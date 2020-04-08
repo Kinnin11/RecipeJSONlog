@@ -21,6 +21,10 @@ export class EnterRecipeComponent implements OnInit {
     ) {  
     }
 
+    get tagList() {
+      return this.recipeService.listOfTags;
+    }
+
 
   ngOnInit(): void {
     this.recipeDetail = null;

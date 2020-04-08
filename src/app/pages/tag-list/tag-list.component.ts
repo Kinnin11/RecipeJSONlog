@@ -14,11 +14,7 @@ export class TagListComponent implements OnInit {
   ) { }
 
   get taglist() {
-    let outputArray = [];
-    for (const i in this.recipeService.getTagList()) {
-      outputArray.push(i);
-    }
-    return outputArray;
+    return this.recipeService.listOfTags;
   }
 
   ngOnInit(): void {

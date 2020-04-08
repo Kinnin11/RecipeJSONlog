@@ -1,72 +1,75 @@
 <h2>Enter recipe</h2>
-<!-- <div class="px-5">
-  <div class="px-5"> -->
-    <form class="text-left border border-light p-5 extrapad" [formGroup]="recipeForm" (ngSubmit)="onSubmit(recipeForm.value)">
+<form class="text-left border border-light p-5 extrapad" [formGroup]="recipeForm"
+  (ngSubmit)="onSubmit(recipeForm.value)">
 
 
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <label for="name" class="active">Name</label>
-            <input class="form-control mb-1" id="name" type="text" formControlName="name" placeholder="Name">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <label for="name" class="active">Name</label>
+        <input class="form-control mb-1" id="name" type="text" formControlName="name" placeholder="Name">
 
-            <label for="servings" class="active">Servings</label>
-            <input class="form-control mb-1 " type="text" name="servings" id="servings" formControlName="servings">
+        <label for="servings" class="active">Servings</label>
+        <input class="form-control mb-1 " type="text" name="servings" id="servings" formControlName="servings">
 
-            <label for="preptime" class="active">Prep time</label>
-            <input class="form-control mb-1 " type="number" formControlName="preptime" placeholder="In minutes">
+        <label for="preptime" class="active">Prep time</label>
+        <input class="form-control mb-1 " type="number" formControlName="preptime" placeholder="In minutes">
 
 
-          </div>
-          <div class="col">
-            <label for="source" class="active">Source</label>
-            <input class="form-control mb-1 " type="text" formControlName="source">
-
-            <label for="image" class="active">Image link</label>
-            <input class="form-control mb-1 " type="text" formControlName="image">
-
-            <label for="cooktime" class="active">Cook time</label>
-            <input class="form-control mb-1 " type="number" name="cooktime" id="cooktime" formControlName="cooktime"
-              placeholder="In minutes">
-          </div>
-        </div>
       </div>
+      <div class="col">
+        <label for="source" class="active">Source</label>
+        <input class="form-control mb-1 " type="text" formControlName="source">
+
+        <label for="image" class="active">Image link</label>
+        <input class="form-control mb-1 " type="text" formControlName="image">
+
+        <label for="cooktime" class="active">Cook time</label>
+        <input class="form-control mb-1 " type="number" name="cooktime" id="cooktime" formControlName="cooktime"
+          placeholder="In minutes">
+      </div>
+    </div>
+  </div>
 
 
 
-      <div class="container">
-        <div class="pt-5" formArrayName="tagList">
-          <label for="tagList" class="active">
-            Tags
-          </label>
-          <div class="mb-1" *ngFor="let item of tagLines.controls; let tagIndex = index" [formGroupName]="tagIndex">
-            <input formControlName="tag">
-            <button class="ml-1 btn btn-danger btn-sm" type="button" (click)="deleteTagLine(tagIndex)">Delete
-              tag</button>
-          </div>
-          <button type="button" (click)="addTagLine()">Add tag</button>
-        </div>
-        <BR>
-        <label for="Ingredients" class="active">Ingredients</label>
-        <textarea id="ingredients" formControlName="ingredients" rows="15" cols="50" class="form-control input-pad"
-          placeholder="Remember to put ';' on both sides of ingredients to create proper tags"></textarea>
-
-      
-
-      <label for="directions" class="active pt-4">
-        Directions
+  <!-- Tag inputs -->
+  <div class="container">
+    <div class="pt-5" formArrayName="tagList">
+      <label for="tagList" class="active">
+        Tags
       </label>
-      <div>
-
-        <textarea class="form-control" id="directions" formControlName="directions" rows="15"></textarea>
+      <div class="mb-1" *ngFor="let item of tagLines.controls; let tagIndex = index" [formGroupName]="tagIndex">
+        <input list="tags" formControlName="tag">
+        <datalist id="tags">
+          <option *ngFor="let i of tagList" [value]="i">
+        </datalist>
+        <button class="ml-1 btn btn-danger btn-sm" type="button" (click)="deleteTagLine(tagIndex)">Delete
+          tag</button>
       </div>
+      <button type="button" (click)="addTagLine()">Add tag</button>
+    </div>
+    <BR>
+    <label for="Ingredients" class="active">Ingredients</label>
+    <textarea id="ingredients" formControlName="ingredients" rows="15" cols="50" class="form-control input-pad"
+      placeholder="Remember to put ';' on both sides of ingredients to create proper tags"></textarea>
 
-      <button class="btn btn-success" type="submit">Submit</button>
-      <button class="btn btn-default ml-1" type="button" (click)="recipeService.copyRecipesToClipboard()">Copy recipes
-        to Clipboard</button>
-      </div>
-    </form>
-  <!-- </div>
+
+
+    <label for="directions" class="active pt-4">
+      Directions
+    </label>
+    <div>
+
+      <textarea class="form-control" id="directions" formControlName="directions" rows="15"></textarea>
+    </div>
+
+    <button class="btn btn-success" type="submit">Submit</button>
+    <button class="btn btn-default ml-1" type="button" (click)="recipeService.copyRecipesToClipboard()">Copy recipes
+      to Clipboard</button>
+  </div>
+</form>
+<!-- </div>
 </div> -->
 
 {{this.recipeForm.value | json}}
