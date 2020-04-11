@@ -1,3 +1,27 @@
-<div class="container text-center pb-5 pages">  
-    <h1>RecipeJsonLog</h1> 
-    </div> 
+<div class="container">
+    <h1 class="text-center">RecipeJsonLog</h1>
+    <div class="row">
+        <div class="col">
+            <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
+                <div formArrayName="ingrList">
+
+                    <div class="mb-1" *ngFor="let ingr of ingrLines.controls; let ingrIndex = index"
+                        [formGroupName]="ingrIndex">
+                        <input formControlName="ingr">
+                    </div>
+                    <button type="button" (click)="addIngrLine()">Add ingredient</button>
+                </div>
+                <button class="btn btn-success" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="col">
+
+            <div *ngIf="recipesByIngredients!=undefined">
+                <ul>
+                    <li *ngFor="let recipe of recipesByIngredients"><a [title]="recipe.name"
+                            [routerLink]="['/recipe-detail', recipe.id]">{{recipe.name}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

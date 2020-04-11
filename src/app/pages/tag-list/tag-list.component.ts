@@ -17,6 +17,10 @@ export class TagListComponent implements OnInit {
     return this.recipeService.listOfTags;
   }
 
+  get ingredientList() {
+    return this.recipeService.listOfIngredients;
+  }
+
   ngOnInit(): void {
   }
 

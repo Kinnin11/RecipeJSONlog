@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import recipes from '../../assets/recipes.json';
 import { RecipeJSON } from '../models/recipeJSON';
 import { ClipboardService } from 'ngx-clipboard';
+import  {Utils}  from '../utils';
 
 @Injectable({
   providedIn: 'root'
@@ -69,16 +70,46 @@ export class RecipeService {
     return outputArray;
   }
 
+  get listOfIngredients(): string[] {
+    let outpuArray = [];
+    this.recipes.forEach(recipe => {
+      recipe.ingredienttags.forEach(ingredient => {
+        if(!outpuArray.includes(ingredient)){
+          outpuArray.push(ingredient);
+        }
+      });      
+    });
+    return outpuArray;
+  }
+
+  searchRecipesByIngredients(ingredients : string[]) : any {
+    let outpuArray = [];
+    for (let i = 0; i < ingredients.length; i++) {
+      ingredients[i] = ingredients[i].toLowerCase();
+      
+    }   
+    console.log(ingredients);
+
+    this.recipes.forEach(recipe => {
+      const intersection = recipe.ingredienttags.filter(element => ingredients.includes(element.toLowerCase()));
+      if(intersection.length != 0) {
+        outpuArray.push({id: recipe.id, matches: intersection.length, name: recipe.name})
+      }
+    });
+    outpuArray.sort(Utils.compareValues("matches", "desc"));
+    return outpuArray;
+  }
+
 
   private fillTagList() {
     //go through each recipes tags
     recipes.forEach(recipe => {
       recipe.tags.forEach(tag => {
         //if tag exists push it onto the tag's recipe list, else create a new tag with list
-        if (this.recipeListPerTag[capitalizeFirstLetter(tag)] != undefined) {
-          this.recipeListPerTag[capitalizeFirstLetter(tag)].push(recipe.id);
+        if (this.recipeListPerTag[Utils.capitalizeFirstLetter(tag)] != undefined) {
+          this.recipeListPerTag[Utils.capitalizeFirstLetter(tag)].push(recipe.id);
         } else {
-          this.recipeListPerTag[capitalizeFirstLetter(tag)] = [recipe.id];
+          this.recipeListPerTag[Utils.capitalizeFirstLetter(tag)] = [recipe.id];
         }
       });
     });
@@ -121,7 +152,7 @@ export class RecipeService {
           this.recipeListPerTag[singleTag].push(id);
         }
       } else {
-        this.recipeListPerTag[capitalizeFirstLetter(singleTag)] = [id];
+        this.recipeListPerTag[Utils.capitalizeFirstLetter(singleTag)] = [id];
       }
     });
 
@@ -131,6 +162,4 @@ export class RecipeService {
   }
 }
 
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
+
