@@ -14,7 +14,7 @@ export class TagListComponent implements OnInit {
   ) { }
 
   get taglist() {
-    return this.recipeService.listOfTags;
+    return this.recipeService.listOfTags.sort();
   }
 
   get ingredientList() {

@@ -12,7 +12,7 @@ import { SearchResultsComponent } from './pages/search/search-results/search-res
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'recipe-list', component: RecipeListComponent },
-  { path: 'recipe-detail/:recipeId', component: RecipeDetailComponent },
+  { path: 'recipe-detail/:recipeId', component: RecipeDetailComponent , runGuardsAndResolvers: 'paramsChange'},
   { path: 'enter-recipe', component: EnterRecipeComponent },
   { path: 'enter-recipe/:recipeId', component: EnterRecipeComponent },
   { path: 'tag-list', component: TagListComponent },
@@ -21,7 +21,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

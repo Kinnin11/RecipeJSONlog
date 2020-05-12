@@ -22,7 +22,7 @@ export class EnterRecipeComponent implements OnInit {
     }
 
     get tagList() {
-      return this.recipeService.listOfTags;
+      return this.recipeService.listOfTags.sort();
     }
 
 

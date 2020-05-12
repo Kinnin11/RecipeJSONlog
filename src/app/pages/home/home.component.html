@@ -19,7 +19,7 @@
             <div *ngIf="recipesByIngredients!=undefined">
                 <ul>
                     <li *ngFor="let recipe of recipesByIngredients"><a [title]="recipe.name"
-                            [routerLink]="['/recipe-detail', recipe.id]">{{recipe.name}}</a></li>
+                            [routerLink]="['/recipe-detail', recipe.id]">{{recipe.name}} ({{recipe.matches}})</a></li>
                 </ul>
             </div>
         </div>

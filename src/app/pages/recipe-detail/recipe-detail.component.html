@@ -1,4 +1,4 @@
-<h2>{{recipe.name}}</h2>
+<h2>{{recipe.id}}. {{recipe.name}}</h2>
 <div *ngIf="recipe" class="container">
   <a [routerLink]="['/enter-recipe', recipe.id]" routerLinkActive="active">Edit Recipe</a><BR>
   <div class="row">
@@ -25,12 +25,35 @@
   <div *ngIf="recipe.source!=''">Source: {{recipe.source}}</div>
   <div *ngIf="recipe.image!=''">{{recipe.image}}</div>
   <ul>
-    <li *ngFor="let ingredient of ingredientList">{{ ingredient }}</li>
+
+    <li *ngFor="let ingredient of ingredientList">
+      <div *ngIf="ingredient.includes('#');else notlink">
+        <span *ngFor="let ingr of ingredient.split('#');let i = index;">
+          <span *ngIf="i%3 == 0;">
+            {{ingredient.split('#')[i]}}
+            <a [title]="ingredient.split('#')[i+2]" [routerLink]="['/recipe-detail', ingredient.split('#')[i+1]]">
+              {{ingredient.split('#')[i+2]}}</a>
+            <span *ngIf="ingredient.split('#').length == i+1">{{ingredient.split('#')[i+3]}}</span>
+            </span>
+          </span>
+      </div>
+      <ng-template #notlink>{{ingredient}}</ng-template>
+    </li>
   </ul>
   <div>
     <ol>
-      <li *ngFor="let line of recipe.directions.split('\n')">{{line}}</li>
+      <li *ngFor="let line of recipe.directions.split('\n')">
+        <div *ngIf="line.includes('#');else notlink">
+          {{line.split('#')[0]}}
+          <a [title]="line.split('#')[2]" [routerLink]="['/recipe-detail', line.split('#')[1]]">
+            {{line.split('#')[2]}}</a>
+          {{line.split('#')[3]}}
+        </div>
+        <ng-template #notlink>{{line}}</ng-template>
+
+      </li>
     </ol>
+
   </div>
 
 </div>

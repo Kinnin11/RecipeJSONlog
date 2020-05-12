@@ -8,7 +8,7 @@ import  {Utils}  from '../utils';
   providedIn: 'root'
 })
 export class RecipeService {
-  private recipes: RecipeJSON[];
+  private recipes;
   private recipeListPerTag = {};
   constructor(
     private _clipboardService: ClipboardService
@@ -91,10 +91,26 @@ export class RecipeService {
     console.log(ingredients);
 
     this.recipes.forEach(recipe => {
+      let match1 = false;
       const intersection = recipe.ingredienttags.filter(element => ingredients.includes(element.toLowerCase()));
-      if(intersection.length != 0) {
+      if(intersection.length != 0 && intersection.length > (ingredients.length / 3)) {
         outpuArray.push({id: recipe.id, matches: intersection.length, name: recipe.name})
+        match1 = true;
       }
+      const intersection2 = recipe.tags.filter(element => ingredients.includes(element.toLowerCase()));
+      if(intersection2.length != 0 && intersection2.length > (ingredients.length / 3)) {
+        if(match1){
+          console.log(recipe);
+          outpuArray.forEach(element => {
+            if(element.id == recipe.id){
+              element.matches += intersection2.length;
+            }
+          });
+        } else {
+        outpuArray.push({id: recipe.id, matches: intersection2.length, name: recipe.name})
+        }
+      }
+    
     });
     outpuArray.sort(Utils.compareValues("matches", "desc"));
     return outpuArray;
